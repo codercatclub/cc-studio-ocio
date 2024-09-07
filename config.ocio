@@ -10,7 +10,7 @@ ocio_profile_version: 2.1
 
 environment:
   {}
-search_path: "luts:filmic"
+search_path: "luts"
 strictparsing: true
 luma: [0.2126, 0.7152, 0.0722]
 name: studio-config-v2.0.0_aces-v1.3_ocio-v2.1
@@ -119,6 +119,99 @@ looks:
         - !<GradingToneTransform>
          shadows: {rgb: [0.2, 0.2, 0.2], master: 0.35, start: 0.4, pivot: 0.1}
         - !<CDLTransform> {power: [1.0912, 1.0912, 1.0912]}
+
+  - !<Look>
+    name: AgX - Greyscale
+    process_space: AgX Log
+    description: A Black and White Look
+    transform: !<GroupTransform>
+      children:
+        - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117], direction: inverse}
+        - !<MatrixTransform> {matrix: [0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0, 0, 0, 1]}
+        - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117]}
+
+  - !<Look>
+    name: AgX - Very High Contrast
+    process_space: AgX Log
+    description: A Very High Contrast Look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingPrimaryTransform>
+          style: log
+          contrast: {rgb: [1.57, 1.57, 1.57], master: 1}
+          saturation: 0.9
+          pivot: {contrast: -0.2}
+
+  - !<Look>
+    name: AgX - High Contrast
+    process_space: AgX Log
+    description: A High Contrast Look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingPrimaryTransform>
+          style: log
+          contrast: {rgb: [1.4, 1.4, 1.4], master: 1}
+          saturation: 0.95
+          pivot: {contrast: -0.2}
+
+  - !<Look>
+    name: AgX - Medium High Contrast
+    process_space: AgX Log
+    description: A Medium High Contrast Look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingPrimaryTransform>
+          style: log
+          contrast: {rgb: [1.2, 1.2, 1.2], master: 1}
+          saturation: 1
+          pivot: {contrast: -0.2}
+
+  - !<Look>
+    name: AgX - Base Contrast
+    process_space: AgX Log
+    description: A Base Contrast Look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingPrimaryTransform>
+          style: log
+          contrast: {rgb: [1, 1, 1], master: 1}
+          pivot: {contrast: -0.2}
+
+  - !<Look>
+    name: AgX - Medium Low Contrast
+    process_space: AgX Log
+    description: A Medium Low Contrast Look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingPrimaryTransform>
+          style: log
+          contrast: {rgb: [0.9, 0.9, 0.9], master: 1}
+          saturation: 1.05
+          pivot: {contrast: -0.2}
+
+  - !<Look>
+    name: AgX - Low Contrast
+    process_space: AgX Log
+    description: A Low Contrast Look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingPrimaryTransform>
+          style: log
+          contrast: {rgb: [0.8, 0.8, 0.8], master: 1}
+          saturation: 1.1
+          pivot: {contrast: -0.2}
+
+  - !<Look>
+    name: AgX - Very Low Contrast
+    process_space: AgX Log
+    description: A Very Low Contrast Look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingPrimaryTransform>
+          style: log
+          contrast: {rgb: [0.7, 0.7, 0.7], master: 1}
+          saturation: 1.15
+          pivot: {contrast: -0.2}
 
 default_view_transform: Un-tone-mapped
 
@@ -1365,7 +1458,7 @@ colorspaces:
   - !<ColorSpace>
     name: Linear FilmLight E-Gamut
     aliases: [Linear E-Gamut I-D65, "FilmLight: Linear - E-Gamut"]
-    family: Linear
+    family: Utility
     equalitygroup:
     bitdepth: 32f
     description: |
@@ -1379,7 +1472,7 @@ colorspaces:
   - !<ColorSpace>
     name: Linear CIE-XYZ E
     aliases: ["FilmLight: Linear - XYZ", Linear CIE-XYZ I-E]
-    family: Chromaticity
+    family: Utility
     equalitygroup:
     bitdepth: 32f
     description: |
@@ -1429,7 +1522,7 @@ colorspaces:
   - !<ColorSpace>
     name: Luminance Compensation Rec.2020
     aliases: [Luminance Compensation BT.2020]
-    family: Utilities
+    family: Utility
     equalitygroup:
     bitdepth: 32f
     description: |
@@ -1445,7 +1538,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: AgX Log
-    family: Log
+    family: AgX
     equalitygroup:
     bitdepth: 32f
     description: |
