@@ -21,21 +21,24 @@ description: |
   This "OpenColorIO" config is geared toward studios requiring a config that includes a wide variety of camera colorspaces, displays and looks.
 
 roles:
+  data: Raw
+  srgb_image: sRGB
+  cc_camera: V-Log V-Gamut
+  scene_linear: ACEScg
   aces_interchange: ACES2065-1
   cie_xyz_d65_interchange: CIE-XYZ-D65
-  color_picking: sRGB - Texture
+  color_picking: sRGB
   color_timing: ACEScct
-  compositing_log: ACEScct
+  compositing_log: V-Log V-Gamut
   data: Raw
   matte_paint: ACEScct
-  scene_linear: ACEScg
-  texture_paint: sRGB - Texture
-  substance_3d_painter_standard_srgb: sRGB - Texture
-  substance_3d_painter_bitmap_import_8bit: sRGB - Texture
-  substance_3d_painter_bitmap_import_16bit: sRGB - Texture
+  texture_paint: sRGB
+  substance_3d_painter_standard_srgb: sRGB
+  substance_3d_painter_bitmap_import_8bit: sRGB
+  substance_3d_painter_bitmap_import_16bit: sRGB
   substance_3d_painter_bitmap_import_floating: Raw
-  substance_3d_painter_substance_material: sRGB - Texture
-  substance_3d_painter_bitmap_export_8bit: sRGB - Texture
+  substance_3d_painter_substance_material: sRGB
+  substance_3d_painter_bitmap_export_8bit: sRGB
   substance_3d_painter_bitmap_export_16bit: Raw
   substance_3d_painter_bitmap_export_floating: Raw
 
@@ -44,56 +47,26 @@ file_rules:
 
 shared_views:
   - !<View> {name: ACES 1.0 - SDR Video, view_transform: ACES 1.0 - SDR Video, display_colorspace: <USE_DISPLAY_NAME>}
-  - !<View> {name: ACES 1.0 - SDR Video (D60 sim on D65), view_transform: ACES 1.0 - SDR Video (D60 sim on D65), display_colorspace: <USE_DISPLAY_NAME>}
-  - !<View> {name: ACES 1.1 - SDR Video (P3 lim), view_transform: ACES 1.1 - SDR Video (P3 lim), display_colorspace: <USE_DISPLAY_NAME>}
-  - !<View> {name: ACES 1.1 - SDR Video (Rec.709 lim), view_transform: ACES 1.1 - SDR Video (Rec.709 lim), display_colorspace: <USE_DISPLAY_NAME>}
-  - !<View> {name: ACES 1.1 - HDR Video (1000 nits & Rec.2020 lim), view_transform: ACES 1.1 - HDR Video (1000 nits & Rec.2020 lim), display_colorspace: <USE_DISPLAY_NAME>}
-  - !<View> {name: ACES 1.1 - HDR Video (2000 nits & Rec.2020 lim), view_transform: ACES 1.1 - HDR Video (2000 nits & Rec.2020 lim), display_colorspace: <USE_DISPLAY_NAME>}
-  - !<View> {name: ACES 1.1 - HDR Video (4000 nits & Rec.2020 lim), view_transform: ACES 1.1 - HDR Video (4000 nits & Rec.2020 lim), display_colorspace: <USE_DISPLAY_NAME>}
-  - !<View> {name: ACES 1.1 - HDR Video (1000 nits & P3 lim), view_transform: ACES 1.1 - HDR Video (1000 nits & P3 lim), display_colorspace: <USE_DISPLAY_NAME>}
-  - !<View> {name: ACES 1.1 - HDR Video (2000 nits & P3 lim), view_transform: ACES 1.1 - HDR Video (2000 nits & P3 lim), display_colorspace: <USE_DISPLAY_NAME>}
-  - !<View> {name: ACES 1.1 - HDR Video (4000 nits & P3 lim), view_transform: ACES 1.1 - HDR Video (4000 nits & P3 lim), display_colorspace: <USE_DISPLAY_NAME>}
+  - !<View> {name: sRGB, view_transform: sRGB, display_colorspace: <USE_DISPLAY_NAME>}
   - !<View> {name: ACES 1.0 - SDR Cinema, view_transform: ACES 1.0 - SDR Cinema, display_colorspace: <USE_DISPLAY_NAME>}
-  - !<View> {name: ACES 1.1 - SDR Cinema (Rec.709 lim), view_transform: ACES 1.1 - SDR Cinema (Rec.709 lim), display_colorspace: <USE_DISPLAY_NAME>}
   - !<View> {name: ACES 1.0 - SDR Cinema (D60 sim on DCI), view_transform: ACES 1.0 - SDR Cinema (D60 sim on DCI), display_colorspace: <USE_DISPLAY_NAME>}
-  - !<View> {name: ACES 1.1 - SDR Cinema (D60 sim on D65), view_transform: ACES 1.1 - SDR Cinema (D60 sim on D65), display_colorspace: <USE_DISPLAY_NAME>}
-  - !<View> {name: ACES 1.1 - SDR Cinema (D65 sim on DCI), view_transform: ACES 1.1 - SDR Cinema (D65 sim on DCI), display_colorspace: <USE_DISPLAY_NAME>}
-  - !<View> {name: ACES 1.1 - HDR Cinema (108 nits & P3 lim), view_transform: ACES 1.1 - HDR Cinema (108 nits & P3 lim), display_colorspace: <USE_DISPLAY_NAME>}
-  - !<View> {name: Un-tone-mapped, view_transform: Un-tone-mapped, display_colorspace: <USE_DISPLAY_NAME>}
 
 displays:
   sRGB - Display:
     - !<View> {name: Raw, colorspace: Raw}
-    - !<Views> [ACES 1.0 - SDR Video, ACES 1.0 - SDR Video (D60 sim on D65), Un-tone-mapped]
+    - !<Views> [ACES 1.0 - SDR Video, sRGB]
     - !<View> {name: AgX, colorspace: AgX Base sRGB}
+    - !<View> {name: SnayLog, colorspace: SnayLog}
     - !<View> {name: AgX - Punchy, colorspace: AgX Base sRGB, look: +AgX - Punchy}
-  Rec.1886 Rec.709 - Display:
-    - !<View> {name: Raw, colorspace: Raw}
-    - !<Views> [ACES 1.0 - SDR Video, ACES 1.0 - SDR Video (D60 sim on D65), Un-tone-mapped]
-  Rec.1886 Rec.2020 - Display:
-    - !<View> {name: Raw, colorspace: Raw}
-    - !<Views> [ACES 1.0 - SDR Video, ACES 1.1 - SDR Video (P3 lim), ACES 1.1 - SDR Video (Rec.709 lim), Un-tone-mapped]
-  Rec.2100-HLG - Display:
-    - !<View> {name: Raw, colorspace: Raw}
-    - !<Views> [ACES 1.1 - HDR Video (1000 nits & Rec.2020 lim), Un-tone-mapped]
-  Rec.2100-PQ - Display:
-    - !<View> {name: Raw, colorspace: Raw}
-    - !<Views> [ACES 1.1 - HDR Video (1000 nits & Rec.2020 lim), ACES 1.1 - HDR Video (2000 nits & Rec.2020 lim), ACES 1.1 - HDR Video (4000 nits & Rec.2020 lim), Un-tone-mapped]
-  ST2084-P3-D65 - Display:
-    - !<View> {name: Raw, colorspace: Raw}
-    - !<Views> [ACES 1.1 - HDR Video (1000 nits & P3 lim), ACES 1.1 - HDR Video (2000 nits & P3 lim), ACES 1.1 - HDR Video (4000 nits & P3 lim), ACES 1.1 - HDR Cinema (108 nits & P3 lim), Un-tone-mapped]
-  P3-D60 - Display:
-    - !<View> {name: Raw, colorspace: Raw}
-    - !<Views> [ACES 1.0 - SDR Cinema, Un-tone-mapped]
   P3-D65 - Display:
     - !<View> {name: Raw, colorspace: Raw}
-    - !<Views> [ACES 1.0 - SDR Cinema, ACES 1.1 - SDR Cinema (Rec.709 lim), ACES 1.1 - SDR Cinema (D60 sim on D65), Un-tone-mapped]
+    - !<Views> [ACES 1.0 - SDR Cinema, sRGB]
   P3-DCI - Display:
     - !<View> {name: Raw, colorspace: Raw}
-    - !<Views> [ACES 1.0 - SDR Cinema (D60 sim on DCI), ACES 1.1 - SDR Cinema (D65 sim on DCI), Un-tone-mapped]
+    - !<Views> [ACES 1.0 - SDR Cinema (D60 sim on DCI), sRGB]
 
-active_displays: [sRGB - Display, Rec.1886 Rec.709 - Display, Rec.1886 Rec.2020 - Display, Rec.2100-HLG - Display, Rec.2100-PQ - Display, ST2084-P3-D65 - Display, P3-D60 - Display, P3-D65 - Display, P3-DCI - Display]
-active_views: [AgX, AgX - Punchy, ACES 1.0 - SDR Video, ACES 1.0 - SDR Video (D60 sim on D65), ACES 1.1 - SDR Video (P3 lim), ACES 1.1 - SDR Video (Rec.709 lim), ACES 1.1 - HDR Video (1000 nits & Rec.2020 lim), ACES 1.1 - HDR Video (2000 nits & Rec.2020 lim), ACES 1.1 - HDR Video (4000 nits & Rec.2020 lim), ACES 1.1 - HDR Video (1000 nits & P3 lim), ACES 1.1 - HDR Video (2000 nits & P3 lim), ACES 1.1 - HDR Video (4000 nits & P3 lim), ACES 1.0 - SDR Cinema, ACES 1.1 - SDR Cinema (Rec.709 lim), ACES 1.0 - SDR Cinema (D60 sim on DCI), ACES 1.1 - SDR Cinema (D60 sim on D65), ACES 1.1 - SDR Cinema (D65 sim on DCI), ACES 1.1 - HDR Cinema (108 nits & P3 lim), Un-tone-mapped, Raw]
+active_displays: [sRGB - Display]
+active_views: [AgX, AgX - Punchy, ACES 1.0 - SDR Video, ACES 1.1 - SDR Video (P3 lim), ACES 1.1 - SDR Video (Rec.709 lim), SnayLog, ACES 1.1 - HDR Video (1000 nits & Rec.2020 lim), ACES 1.1 - HDR Video (2000 nits & Rec.2020 lim), ACES 1.1 - HDR Video (4000 nits & Rec.2020 lim), ACES 1.1 - HDR Video (1000 nits & P3 lim), ACES 1.1 - HDR Video (2000 nits & P3 lim), ACES 1.1 - HDR Video (4000 nits & P3 lim), ACES 1.0 - SDR Cinema, ACES 1.1 - SDR Cinema (Rec.709 lim), ACES 1.0 - SDR Cinema (D60 sim on DCI), ACES 1.1 - SDR Cinema (D60 sim on D65), ACES 1.1 - SDR Cinema (D65 sim on DCI), ACES 1.1 - HDR Cinema (108 nits & P3 lim), sRGB, Raw]
 inactive_colorspaces: [Luminance Compensation Rec.2020, CIE-XYZ-D65, sRGB - Display, Rec.1886 Rec.709 - Display, Rec.1886 Rec.2020 - Display, Rec.2100-HLG - Display, Rec.2100-PQ - Display, ST2084-P3-D65 - Display, P3-D60 - Display, P3-D65 - Display, P3-DCI - Display]
 
 looks:
@@ -213,7 +186,7 @@ looks:
           saturation: 1.15
           pivot: {contrast: -0.2}
 
-default_view_transform: Un-tone-mapped
+default_view_transform: sRGB
 
 view_transforms:
   - !<ViewTransform>
@@ -231,20 +204,6 @@ view_transforms:
       ACEStransformID: urn:ampas:aces:transformId:v1.5:InvODT.Academy.Rec709_100nits_dim.a1.0.3
       ACEStransformID: urn:ampas:aces:transformId:v1.5:InvODT.Academy.Rec2020_100nits_dim.a1.0.3
     from_scene_reference: !<BuiltinTransform> {style: ACES-OUTPUT - ACES2065-1_to_CIE-XYZ-D65 - SDR-VIDEO_1.0}
-
-  - !<ViewTransform>
-    name: ACES 1.0 - SDR Video (D60 sim on D65)
-    description: |
-      Component of ACES Output Transforms for SDR D65 video simulating D60 white
-
-      ACEStransformID: urn:ampas:aces:transformId:v1.5:ODT.Academy.RGBmonitor_D60sim_100nits_dim.a1.0.3
-      ACEStransformID: urn:ampas:aces:transformId:v1.5:ODT.Academy.Rec709_D60sim_100nits_dim.a1.0.3
-
-      AMF Components
-      --------------
-      ACEStransformID: urn:ampas:aces:transformId:v1.5:InvODT.Academy.RGBmonitor_D60sim_100nits_dim.a1.0.3
-      ACEStransformID: urn:ampas:aces:transformId:v1.5:InvODT.Academy.Rec709_D60sim_100nits_dim.a1.0.3
-    from_scene_reference: !<BuiltinTransform> {style: ACES-OUTPUT - ACES2065-1_to_CIE-XYZ-D65 - SDR-VIDEO-D60sim-D65_1.0}
 
   - !<ViewTransform>
     name: ACES 1.1 - SDR Video (P3 lim)
@@ -407,7 +366,7 @@ view_transforms:
     from_scene_reference: !<BuiltinTransform> {style: ACES-OUTPUT - ACES2065-1_to_CIE-XYZ-D65 - HDR-CINEMA-108nit-7.2nit-P3lim_1.1}
 
   - !<ViewTransform>
-    name: Un-tone-mapped
+    name: sRGB
     from_scene_reference: !<BuiltinTransform> {style: UTILITY - ACES-AP0_to_CIE-XYZ-D65_BFD}
 
 display_colorspaces:
@@ -1422,8 +1381,8 @@ colorspaces:
         - !<ExponentWithLinearTransform> {gamma: 2.4, offset: 0.055, direction: inverse}
 
   - !<ColorSpace>
-    name: sRGB - Texture
-    aliases: [srgb_tx, Utility - sRGB - Texture, srgb_texture, Input - Generic - sRGB - Texture]
+    name: sRGB
+    aliases: [srgb_tx, sRGB - Texture, Utility - sRGB - Texture, srgb_texture, Input - Generic - sRGB - Texture]
     family: Utility
     equalitygroup: ""
     bitdepth: 32f
@@ -1451,10 +1410,31 @@ colorspaces:
     categories: [file-io, texture]
     allocation: uniform
 
+
+  - !<ColorSpace>
+    name: SnayLog
+    aliases: []
+    family: Utility
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      S-Log view transform
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: ACES2065-1, dst: S-Log3 S-Gamut3}
+        - !<GradingPrimaryTransform> 
+          style: log
+          gamma: {rgb: [1,1,1], master: 0.515}
+          gain: {rgb: [1,1,1], master: 1.5}
+          saturation: 1.44
+
+
+
   #
   # AgX
   #
-
+            
   - !<ColorSpace>
     name: Linear FilmLight E-Gamut
     aliases: [Linear E-Gamut I-D65, "FilmLight: Linear - E-Gamut"]
