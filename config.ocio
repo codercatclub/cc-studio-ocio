@@ -1410,6 +1410,17 @@ colorspaces:
     categories: [file-io, texture]
     allocation: uniform
 
+  - !<ColorSpace>
+    name: Non-Color
+    aliases: [Utility - Non-Color, non-color, data]
+    family: Utility
+    equalitygroup: ""
+    bitdepth: 32f
+    description: Same as Raw. Added for Blender 3rd party tools compatebility.
+    isdata: true
+    categories: [file-io, texture]
+    allocation: uniform
+
 
   - !<ColorSpace>
     name: SnayLog
