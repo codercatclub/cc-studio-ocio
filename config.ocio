@@ -1412,7 +1412,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Non-Color
-    aliases: [Utility - Non-Color, non-color, data]
+    aliases: []
     family: Utility
     equalitygroup: ""
     bitdepth: 32f
