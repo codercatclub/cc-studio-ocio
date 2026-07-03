@@ -58,6 +58,10 @@ displays:
     - !<View> {name: AgX, colorspace: AgX Base sRGB}
     - !<View> {name: SnayLog, colorspace: SnayLog}
     - !<View> {name: AgX - Punchy, colorspace: AgX Base sRGB, look: +AgX - Punchy}
+  P3 - Display:
+    - !<View> {name: Raw, colorspace: Raw}
+    - !<Views> [ACES 1.0 - SDR Video, sRGB]
+    - !<View> {name: AgX, colorspace: AgX Base sRGB}
   P3-D65 - Display:
     - !<View> {name: Raw, colorspace: Raw}
     - !<Views> [ACES 1.0 - SDR Cinema, sRGB]
@@ -65,7 +69,7 @@ displays:
     - !<View> {name: Raw, colorspace: Raw}
     - !<Views> [ACES 1.0 - SDR Cinema (D60 sim on DCI), sRGB]
 
-active_displays: [sRGB - Display]
+active_displays: [P3 - Display]
 active_views: [AgX, AgX - Punchy, ACES 1.0 - SDR Video, ACES 1.1 - SDR Video (P3 lim), ACES 1.1 - SDR Video (Rec.709 lim), SnayLog, ACES 1.1 - HDR Video (1000 nits & Rec.2020 lim), ACES 1.1 - HDR Video (2000 nits & Rec.2020 lim), ACES 1.1 - HDR Video (4000 nits & Rec.2020 lim), ACES 1.1 - HDR Video (1000 nits & P3 lim), ACES 1.1 - HDR Video (2000 nits & P3 lim), ACES 1.1 - HDR Video (4000 nits & P3 lim), ACES 1.0 - SDR Cinema, ACES 1.1 - SDR Cinema (Rec.709 lim), ACES 1.0 - SDR Cinema (D60 sim on DCI), ACES 1.1 - SDR Cinema (D60 sim on D65), ACES 1.1 - SDR Cinema (D65 sim on DCI), ACES 1.1 - HDR Cinema (108 nits & P3 lim), sRGB, Raw]
 inactive_colorspaces: [Luminance Compensation Rec.2020, CIE-XYZ-D65, sRGB - Display, Rec.1886 Rec.709 - Display, Rec.1886 Rec.2020 - Display, Rec.2100-HLG - Display, Rec.2100-PQ - Display, ST2084-P3-D65 - Display, P3-D60 - Display, P3-D65 - Display, P3-DCI - Display]
 
@@ -376,7 +380,7 @@ display_colorspaces:
     family: ""
     equalitygroup: ""
     bitdepth: 32f
-    description: The "CIE XYZ (D65)" display connection colorspace.
+    description: The "CIE XYZ (D65 white)" display connection colorspace.
     isdata: false
     allocation: uniform
 
@@ -400,6 +404,25 @@ display_colorspaces:
     encoding: sdr-video
     allocation: uniform
     from_display_reference: !<BuiltinTransform> {style: DISPLAY - CIE-XYZ-D65_to_sRGB}
+
+  - !<ColorSpace>
+    name: P3 - Display
+    aliases: [p3_display, displayp3, apple_displayp3]
+    family: Display
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      Convert CIE XYZ (D65 white) to Display P3 (P3 primaries, D65 white, sRGB transfer function).
+      Matches macOS ColorSync Display P3 profile used by modern Apple displays.
+    isdata: false
+    categories: [file-io]
+    encoding: sdr-video
+    allocation: uniform
+    from_display_reference: !<GroupTransform>
+      name: CIE-XYZ-D65 to P3 Display
+      children:
+        - !<MatrixTransform> {matrix: [2.49349691194142, -0.93138361791912, -0.402710784450717, 0, -0.829488969561575, 1.76266406031835, 0.0236246898516313, 0, 0.0358458302437845, -0.0761723892680418, 0.956884524007687, 0, 0, 0, 0, 1]}
+        - !<ExponentWithLinearTransform> {gamma: 2.4, offset: 0.055, direction: inverse}
 
   - !<ColorSpace>
     name: Rec.1886 Rec.709 - Display
