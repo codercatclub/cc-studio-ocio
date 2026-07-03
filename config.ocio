@@ -66,7 +66,7 @@ displays:
     - !<View> {name: AgX - Punchy, colorspace: AgX Base sRGB, look: +AgX - Punchy}
 
 active_displays: [P3 - Display]
-active_views: [sRGB, AgX, AgX - Punchy, ACES 1.0 - SDR Video, SnayLog, Raw]
+active_views: [sRGB, AgX, AgX - Punchy, ACES 1.0 - SDR Video, Raw]
 inactive_colorspaces: [Luminance Compensation Rec.2020, CIE-XYZ-D65, sRGB - Display, Rec.1886 Rec.709 - Display, Rec.1886 Rec.2020 - Display, Rec.2100-HLG - Display, Rec.2100-PQ - Display, ST2084-P3-D65 - Display, P3-D60 - Display, P3-DCI - Display]
 
 looks:
