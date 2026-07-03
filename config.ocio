@@ -62,16 +62,12 @@ displays:
     - !<View> {name: Raw, colorspace: Raw}
     - !<Views> [ACES 1.0 - SDR Video, sRGB]
     - !<View> {name: AgX, colorspace: AgX Base sRGB}
-  P3-D65 - Display:
-    - !<View> {name: Raw, colorspace: Raw}
-    - !<Views> [ACES 1.0 - SDR Cinema, sRGB]
-  P3-DCI - Display:
-    - !<View> {name: Raw, colorspace: Raw}
-    - !<Views> [ACES 1.0 - SDR Cinema (D60 sim on DCI), sRGB]
+    - !<View> {name: SnayLog, colorspace: SnayLog}
+    - !<View> {name: AgX - Punchy, colorspace: AgX Base sRGB, look: +AgX - Punchy}
 
 active_displays: [P3 - Display]
-active_views: [AgX, AgX - Punchy, ACES 1.0 - SDR Video, ACES 1.1 - SDR Video (P3 lim), ACES 1.1 - SDR Video (Rec.709 lim), SnayLog, ACES 1.1 - HDR Video (1000 nits & Rec.2020 lim), ACES 1.1 - HDR Video (2000 nits & Rec.2020 lim), ACES 1.1 - HDR Video (4000 nits & Rec.2020 lim), ACES 1.1 - HDR Video (1000 nits & P3 lim), ACES 1.1 - HDR Video (2000 nits & P3 lim), ACES 1.1 - HDR Video (4000 nits & P3 lim), ACES 1.0 - SDR Cinema, ACES 1.1 - SDR Cinema (Rec.709 lim), ACES 1.0 - SDR Cinema (D60 sim on DCI), ACES 1.1 - SDR Cinema (D60 sim on D65), ACES 1.1 - SDR Cinema (D65 sim on DCI), ACES 1.1 - HDR Cinema (108 nits & P3 lim), sRGB, Raw]
-inactive_colorspaces: [Luminance Compensation Rec.2020, CIE-XYZ-D65, sRGB - Display, Rec.1886 Rec.709 - Display, Rec.1886 Rec.2020 - Display, Rec.2100-HLG - Display, Rec.2100-PQ - Display, ST2084-P3-D65 - Display, P3-D60 - Display, P3-D65 - Display, P3-DCI - Display]
+active_views: [sRGB, AgX, AgX - Punchy, ACES 1.0 - SDR Video, SnayLog, Raw]
+inactive_colorspaces: [Luminance Compensation Rec.2020, CIE-XYZ-D65, sRGB - Display, Rec.1886 Rec.709 - Display, Rec.1886 Rec.2020 - Display, Rec.2100-HLG - Display, Rec.2100-PQ - Display, ST2084-P3-D65 - Display, P3-D60 - Display, P3-DCI - Display]
 
 looks:
   - !<Look>
@@ -551,28 +547,6 @@ display_colorspaces:
     encoding: sdr-video
     allocation: uniform
     from_display_reference: !<BuiltinTransform> {style: DISPLAY - CIE-XYZ-D65_to_G2.6-P3-D60-BFD}
-
-  - !<ColorSpace>
-    name: P3-D65 - Display
-    aliases: [p3d65_display]
-    family: Display
-    equalitygroup: ""
-    bitdepth: 32f
-    description: |
-      Convert CIE XYZ (D65 white) to Gamma 2.6, P3-D65
-
-      AMF Components
-      --------------
-      ACEStransformID: urn:ampas:aces:transformId:v1.5:ODT.Academy.P3D65_48nits.a1.1.0
-      ACEStransformID: urn:ampas:aces:transformId:v1.5:InvODT.Academy.P3D65_48nits.a1.1.0
-      ACEStransformID: urn:ampas:aces:transformId:v1.5:ODT.Academy.P3D65_Rec709limited_48nits.a1.1.0
-      ACEStransformID: urn:ampas:aces:transformId:v1.5:ODT.Academy.P3D65_D60sim_48nits.a1.1.0
-      ACEStransformID: urn:ampas:aces:transformId:v1.5:InvODT.Academy.P3D65_D60sim_48nits.a1.1.0
-    isdata: false
-    categories: [file-io]
-    encoding: sdr-video
-    allocation: uniform
-    from_display_reference: !<BuiltinTransform> {style: DISPLAY - CIE-XYZ-D65_to_G2.6-P3-D65}
 
   - !<ColorSpace>
     name: P3-DCI - Display
